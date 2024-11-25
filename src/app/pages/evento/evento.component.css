@@ -1,0 +1,56 @@
+mat-form-field {
+    width: 100%;
+}
+
+table {
+    width: 100%;
+}
+
+.headers-style {
+    font-size: medium;
+    font-weight: bold;
+}
+
+.rows-color-hover:hover {
+    background-color: #cef8ff;
+}
+
+.cerrar-sesion {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 30px 50px 0px 50px;
+}
+
+mat-card-title {
+    margin: 20px 50px 0px 50px;
+    font-size: xxx-large;
+}
+
+mat-card {
+    margin: 20px 50px 40px 50px;
+}
+
+.small-text {
+    font-size: 12px;
+}
+
+.custom-color-inscripcion {
+    color: #4caf50;
+}
+
+.custom-color-dimision {
+    color: #d5cb0f;
+}
+
+.estado-activo {
+    color: #11c333;
+    font-weight: bold;
+}
+
+.estado-inactivo {
+    color: red;
+    font-weight: bold;
+}
+
+.centered th, .centered td { text-align: center; }

@@ -1,0 +1,123 @@
+<div class="cerrar-sesion">
+    <button mat-raised-button color="warn" (click)="CerrarSesion()">
+        <mat-icon mat-list-icon>logout</mat-icon>Cerrar Sesión
+    </button>
+</div>
+
+<mat-card-title>Eventos Disponibles
+    <button mat-raised-button color="primary" (click)="ModalCrearEvento()">
+        <mat-icon mat-list-icon>add</mat-icon>Crear Evento
+    </button>
+</mat-card-title>
+
+<mat-card>
+    <mat-card-content class="dashboard-card-content" style="padding: 20px 20px 20px 20px;">
+
+        <mat-form-field appearance="fill">
+            <mat-label>Buscar</mat-label>
+            <input matInput (keyup)="AplicarFiltroBusquedaTabla($event)" #input>
+        </mat-form-field>
+
+        <div class="mat-elevation-z3">
+            <table mat-table [dataSource]="dataListaEventos">
+
+                <!-- <ng-container matColumnDef="idEvento">
+                    <th mat-header-cell *matHeaderCellDef>IdEvento</th>
+                    <td mat-cell *matCellDef="let element" class="small-text">{{element.idEvento}}</td>
+                </ng-container> -->
+
+                <!-- <ng-container matColumnDef="idUsuarioCreacion">
+                    <th mat-header-cell *matHeaderCellDef>IdUsuarioCreacion</th>
+                    <td mat-cell *matCellDef="let element" class="small-text">{{element.idUsuarioCreacion}}</td>
+                </ng-container> -->
+
+                <!-- <ng-container matColumnDef="cuposDisponibles">
+                    <th mat-header-cell *matHeaderCellDef>Cupos disponibles</th>
+                    <td mat-cell *matCellDef="let element" class="small-text">{{element.cuposDisponibles}}</td>
+                </ng-container> -->
+
+                <ng-container matColumnDef="nombreEvento">
+                    <th mat-header-cell *matHeaderCellDef>Evento</th>
+                    <td mat-cell *matCellDef="let element"class="small-text">{{element.nombreEvento}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="descripcion">
+                    <th mat-header-cell *matHeaderCellDef>Descripción</th>
+                    <td mat-cell *matCellDef="let element" class="small-text">{{element.descripcion}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="fechaHora">
+                    <th mat-header-cell *matHeaderCellDef>Fecha y Hora</th>
+                    <td mat-cell *matCellDef="let element" class="small-text">{{element.fechaHora}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="direccion_Ubicacion">
+                    <th mat-header-cell *matHeaderCellDef>Dirección/Ubicación</th>
+                    <td mat-cell *matCellDef="let element" class="small-text">{{element.direccion_Ubicacion}}</td>
+                </ng-container>
+
+                <ng-container class="centered" matColumnDef="capMaxPermitida">
+                    <th mat-header-cell *matHeaderCellDef>Cap. Max. Permitida</th>
+                    <td mat-cell *matCellDef="let element" class="small-text">{{element.capMaxPermitida}}</td>
+                </ng-container>
+
+                <ng-container class="centered" matColumnDef="cantidadAsistentes">
+                    <th mat-header-cell *matHeaderCellDef>No. Asistentes</th>
+                    <td mat-cell *matCellDef="let element" class="small-text">{{element.cantidadAsistentes}}</td>
+                </ng-container>
+
+                <ng-container class="centered" matColumnDef="usuarioInscrito">
+                    <th mat-header-cell *matHeaderCellDef>¿Estás inscrito?</th>
+                    <td mat-cell *matCellDef="let element" [ngClass]="{'estado-activo': element.esUsuarioInscrito == true, 'estado-inactivo': element.esUsuarioInscrito == false}">
+                        {{element.esUsuarioInscrito == true ? "Sí" : "No"}}
+                </ng-container>
+
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef style="width: 130px;"></th>
+                    <td mat-cell *matCellDef="let element">
+                        <ng-container *ngIf="element.idUsuarioCreacion == idUsuario">
+                            <button mat-icon-button color="primary" (click)="ModalEditarEvento(element)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button mat-icon-button color="warn" (click)="ModalEliminarEvento(element)" [disabled]="element.cantidadAsistentes > 0">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </ng-container>
+
+                        <ng-container *ngIf="element.idUsuarioCreacion != idUsuario">
+                            <button mat-icon-button class="custom-color-inscripcion" (click)="ModalInscripcionAEvento(element)" *ngIf="element.cuposDisponibles > 0 && !element.esUsuarioInscrito && suscripcionesUsuarioActual < 3">
+                                <mat-icon>person_add_alt_1</mat-icon>
+                            </button>
+                            <button mat-icon-button class="custom-color-dimision" (click)="ModalDimisionDeEvento(element)" *ngIf="element.esUsuarioInscrito">
+                                <mat-icon>person_add_disabled</mat-icon>
+                            </button>
+                        </ng-container>
+                    </td>
+                </ng-container>
+
+                <!-- HEADERS -->
+                <tr mat-header-row class="headers-style" *matHeaderRowDef="columnasTabla"></tr>
+
+                <!-- ROWS -->
+                <tr mat-row class="rows-color-hover" *matRowDef="let row; columns: columnasTabla;"></tr>
+
+                <tr class="mat-row" *matNoDataRow="">
+                    <td class="mat-cell" colspan="4">
+                        <div style="padding: 20px 20px 20px 20px;">
+                            <ng-container *ngIf="input.value; else noData">
+                                No existe ningún registro con el filtro de búsqueda aplicado: <b>{{ input.value }}</b>
+                            </ng-container>
+                            <ng-template #noData>
+                                No existe ningún registro en la BD.
+                            </ng-template>
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+
+            <mat-divider></mat-divider>
+            <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons=""></mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

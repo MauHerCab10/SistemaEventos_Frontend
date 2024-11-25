@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Autenticacion_JWT": {
+    "SistemaEventos": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -27,6 +27,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -59,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Autenticacion_JWT:build:production"
+              "buildTarget": "SistemaEventos:build:production"
             },
             "development": {
-              "buildTarget": "Autenticacion_JWT:build:development"
+              "buildTarget": "SistemaEventos:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -85,6 +86,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -92,5 +94,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "17c9fe91-0537-4d4d-868a-78640b9216f9"
   }
 }

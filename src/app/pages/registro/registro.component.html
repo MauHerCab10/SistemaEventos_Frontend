@@ -1,0 +1,30 @@
+<div class="card-container">
+    <mat-card appearance="outlined">
+        <mat-card-header>
+            <mat-card-title style="padding: 0px 5px 10px 5px;">Registro de Usuario</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="form-custom" [formGroup]="formRegistro">
+                <mat-form-field class="input-custom">
+                    <mat-label>Nombre y Apellido</mat-label>
+                    <input matInput formControlName="nombreApellido" type="text">
+                </mat-form-field>
+                <mat-form-field class="input-custom">
+                    <mat-label>Nombre de usuario</mat-label>
+                    <input matInput formControlName="nombreUsuario" type="text">
+                </mat-form-field>
+                <mat-form-field class="input-custom">
+                    <mat-label>Contraseña</mat-label>
+                    <input [type]="ocultarPassword ? 'password' : 'text'" formControlName="contrasena" matInput autocomplete="off">
+                    <button mat-icon-button matSuffix (click)="ocultarPassword = !ocultarPassword" type="button">
+                        <mat-icon>{{ ocultarPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <div class="flex">
+                    <button mat-raised-button color="primary" (click)="RegistrarUsuario()" [disabled]="formRegistro.invalid">Registrarse</button>
+                    <button mat-raised-button color="warn" (click)="Regresar()" style="margin-left: 20px;">Regresar</button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

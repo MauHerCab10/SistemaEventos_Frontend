@@ -1,0 +1,29 @@
+<div class="body">
+    <mat-card class="loginCard" appearance="outlined">
+        <mat-card-header class="header">
+            <mat-card-title>Iniciar Sesión</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="form-custom" [formGroup]="formLogin">
+                <mat-form-field class="input-custom">
+                    <mat-label>Nombre de Usuario</mat-label>
+                    <input matInput formControlName="nombreUsuario" type="text">
+                </mat-form-field>
+                <mat-form-field class="input-custom">
+                    <mat-label>Contraseña</mat-label>
+                    <input [type]="ocultarPassword ? 'password' : 'text'" formControlName="contrasena" matInput autocomplete="off">
+                    <button mat-icon-button matSuffix (click)="ocultarPassword = !ocultarPassword" type="button">
+                        <mat-icon>{{ ocultarPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <div>
+                    <button mat-raised-button color="primary" (click)="IniciarSesion()" [disabled]="formLogin.invalid">Iniciar Sesión</button>
+                    <button mat-raised-button color="warn" (click)="Registrarse()" style="margin-left: 20px;">Registrarse</button>
+                </div>
+            </form>
+        </mat-card-content>
+        <mat-card-footer>
+            <mat-progress-bar mode="indeterminate" *ngIf="mostrarLoading"></mat-progress-bar>
+        </mat-card-footer>
+    </mat-card>
+</div>
